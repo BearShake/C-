@@ -191,6 +191,26 @@ class Sarakststemplate{
 
         }
 
+        void pushFIFO(T n){
+            elem *temp = new elem();
+            temp->num = n;
+            last->next = temp;
+            last = last->next;
+        }
+
+        void popFIFO(){
+            p = first;
+            while(p->next != last){
+                p = p->next;
+            }
+            delete last;
+            last = p;
+
+
+        }
+
+
+
         void Print();
 
 };
@@ -206,12 +226,19 @@ class Sarakststemplate{
 int main(){
 	int xx,del,vieta,el,piev;
 	LIFO::Sarakststemplate <int>x;
+    int d;
 
 
 
-
+	for(int i = 0;i<5;i++){
+        cin >> xx;
+        x.pievien(xx);
+	}
     cout << endl;
-    x.pushAdv();
+    cin >> d;
+    x.pushFIFO(d);
+    cout << endl;
+    x.popFIFO();
     x.izvad();
 
 
