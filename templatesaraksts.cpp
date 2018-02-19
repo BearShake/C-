@@ -1,6 +1,7 @@
 #include <iostream>
 #include "stdio.h"
 #include "stdlib.h"
+#include "WinDef.h"
 using namespace std;
 
 namespace LIFO
@@ -14,7 +15,12 @@ class Sarakststemplate{
 	private:
 		T x,dz,length;
 		elem * first = NULL, *last = NULL, *p = NULL;
+		int lg;
 	public:
+
+		BYTE getByteofStruct(){
+			return sizeof(struct elem);
+		}
 
 		void pievien(T x)
 		{
@@ -28,6 +34,7 @@ class Sarakststemplate{
 				last->next = p;
 				last = last ->next;
 			}
+			lg++;
 		}
 
 		void izvad()
@@ -211,7 +218,44 @@ class Sarakststemplate{
 
 
 
-        void Print();
+        void sortList(){
+        	
+        elem *t1;	
+        
+        	for(p = first; p!=NULL; p=p->next){
+        		for(t1 = first; t1->next!=NULL; t1 = t1->next){
+        			if(p->num < t1->num){
+        				swap(t1,p);
+					}
+				}
+			}	
+		}
+		
+		void Merge(elem *p, elem *first, elem *last){
+			
+			
+		}
+		
+		void mergeSort(elem* p, elem *first , elem *last){
+			elem *center = NULL;
+			if(first->num < last->num){
+			
+				lg/2-1
+				mergeSort();
+				mergeSort();
+				Merge(elem*p, elem* first, elem *last);
+			}
+			
+			
+		}
+		
+		void swap(elem *t1, elem *t2){
+			T temp = NULL;
+			temp = t1->num;
+			t1->num = t2->num;
+			t2->num = temp;
+			
+		}
 
 };
 
@@ -235,12 +279,14 @@ int main(){
         x.pievien(xx);
 	}
     cout << endl;
-    cin >> d;
-    x.pushFIFO(d);
+    x.sortList();
     cout << endl;
-    x.popFIFO();
+    
     x.izvad();
-
+    cout << endl;
+    
+	cout << sizeof(LIFO::Sarakststemplate <int>);
+	cout << x.getByteofStruct();
 
 	return 0;
 }
