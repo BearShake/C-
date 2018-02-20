@@ -215,15 +215,24 @@ class Sarakststemplate{
             
         }
 
-        void popFIFO(){
-            p = first;
-            while(p->next != last){
-                p = p->next;
-            }
-            delete last;
-            last = p;
+        void addFIFO(T a){
+
+            elem *temp = new elem();
+            temp=>num = a;
+            last->next = temp;
+
+        }
+
+        T popFIFO(){
 
 
+            elem *temp = new elem();
+            T i = 0;
+            t = first->num;
+            temp = first->next;
+            delete first;
+            first = temp;
+            return i;
         }
 
 
