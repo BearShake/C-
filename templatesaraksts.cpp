@@ -16,7 +16,7 @@ class Sarakststemplate{
 	};
 	private:
 		T x,dz,length;
-		elem * first = NULL, *last = NULL, *p = NULL;
+		elem * first = NULL, *last = NULL, *p = NULL, *node = NULL;
 		int lg;
 	public:
 
@@ -128,30 +128,7 @@ class Sarakststemplate{
 			}
 		}
 
-		void ievietotelement(int cz, T el)
-		{
-			if( cz<1 || cz > this->length) cout << "Jusu saraksta nav jusu ievaditas vietas numura ;( "<< endl;
-			else{
-				int i = 0;
-				p = first;
-				if (cz == 1){
-					elem *pp = new elem;
-					pp->num = el;
-					pp->next = p;
-					first = pp;
-				}else{
-					while( i+1<cz){
-						p = p->next;
-						i++;
-					}
-					elem *newel = new elem;
-					newel->num = el;
-					newel->next = p->next;
-					p->next = newel;
-				}
-			}
-
-		}
+	
 
 		void push(T el){
 
@@ -163,42 +140,28 @@ class Sarakststemplate{
 
 		}
 
-		void pushAdv(){
-
-            for (int i = 0;i<50000;i++){
-                p = new elem();
-                p->num = rand() & 80 + 1;
-                p->next = first;
-                first = p;
-
-            }
-
-		}
+	
 
 
-        T pop(){
+        T popLIFO(){
 
             if (first == NULL){
-                    return NULL;
+ 					return 0;
+ 					
             }else{
-
-                elem *rt = first;
-
-                first->next = first;
+                elem *rt = new elem();
+                rt = first;
                 T ret = rt->num;
-                delete rt();
+               
+                first = first->next;
+                delete rt;
                 return ret;
-
-
-
-
-            return rt;
             }
 
         }
 
 
-        void pushFIFO(T n){
+        void pushLIFO(T n){
         	
         	if(first == NULL){
         		
@@ -208,19 +171,28 @@ class Sarakststemplate{
 			}else{
 				elem *temp = new elem();
             	temp->num = n;
-            	last->next = temp;
-            	last = last->next;
-			}
-        	
-            
+            	temp->next = first;
+            	first = temp;
+			}  
         }
+        
+        
 
         void addFIFO(T a){
+        	
+        	elem *temp = last;
+        	last = new elem();
+        	last->num = a;
+        	
+        	if(first == NULL){
+        		first = last;
+			}else{
+				
+        		temp->next = last;		
+			}
+        	
 
-            elem *temp = new elem();
-            temp=>num = a;
-            last->next = temp;
-
+            
         }
 
         T popFIFO(){
@@ -228,11 +200,13 @@ class Sarakststemplate{
 
             elem *temp = new elem();
             T i = 0;
-            t = first->num;
+            i = first->num;
             temp = first->next;
             delete first;
+            if(first == NULL) first == NULL;
             first = temp;
             return i;
+            
         }
 
 
@@ -290,15 +264,45 @@ class Sarakststemplate{
 int main(){
 	int xx,del,vieta,el,piev;
 	LIFO::Sarakststemplate <int>x;
-    int d;
-
-
-
+    
+    /*
+    for(int i = 0;i<1500000;i++){
+		x.addFIFO(rand() % 20);
+			
+	}
+	
+	
+	for(int j = 0;j<1500000;j++){
+		x.popFIFO();
+	}
+	*/
+	
+	
+	
+	//TEST FOR LIFO
+	/*
+	for(int i = 0;i<5;i++){
+		cin >> xx;
+		x.pushLIFO(xx);
+	}
+	cout << endl;
+	x.izvad();
+	cout << x.popLIFO();
+	x.izvad();
+	*/
+	
+	for (int i = 0;i<1500000;i++){
+		x.pushLIFO(rand() %20);
+	}
+	
+	for(int j = 0 ;j<1500000;j++){
+		x.popLIFO();
+	}
+	
+	
 	
     
-    int t = clock();
-    
-    
+    /*
     for(int i = 0;i<50000;i++){
     	x.pushFIFO(rand( ) % 20);    	
 	}
@@ -306,7 +310,7 @@ int main(){
 	for( int j; j<50000;j++){
 		x.popFIFO();
 	}
-	
+	*/
 	
 	
 	
