@@ -2,6 +2,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "WinDef.h"
+#include  "time.h"
+
 using namespace std;
 
 namespace LIFO
@@ -193,16 +195,24 @@ class Sarakststemplate{
             return rt;
             }
 
-
-
-
         }
 
+
         void pushFIFO(T n){
-            elem *temp = new elem();
-            temp->num = n;
-            last->next = temp;
-            last = last->next;
+        	
+        	if(first == NULL){
+        		
+        		elem *temp = new elem();
+            	temp->num = n;
+            	first = last = temp;
+			}else{
+				elem *temp = new elem();
+            	temp->num = n;
+            	last->next = temp;
+            	last = last->next;
+			}
+        	
+            
         }
 
         void popFIFO(){
@@ -235,7 +245,8 @@ class Sarakststemplate{
 			
 			
 		}
-		
+	
+	/*	
 		void mergeSort(elem* p, elem *first , elem *last){
 			elem *center = NULL;
 			if(first->num < last->num){
@@ -248,7 +259,7 @@ class Sarakststemplate{
 			
 			
 		}
-		
+	*/	
 		void swap(elem *t1, elem *t2){
 			T temp = NULL;
 			temp = t1->num;
@@ -274,19 +285,24 @@ int main(){
 
 
 
-	for(int i = 0;i<5;i++){
-        cin >> xx;
-        x.pievien(xx);
+	
+    
+    int t = clock();
+    
+    
+    for(int i = 0;i<50000;i++){
+    	x.pushFIFO(rand( ) % 20);    	
 	}
-    cout << endl;
-    x.sortList();
-    cout << endl;
-    
-    x.izvad();
-    cout << endl;
-    
-	cout << sizeof(LIFO::Sarakststemplate <int>);
-	cout << x.getByteofStruct();
+	
+	for( int j; j<50000;j++){
+		x.popFIFO();
+	}
+	
+	
+	
+	
+
+
 
 	return 0;
 }
