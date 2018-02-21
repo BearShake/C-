@@ -23,6 +23,10 @@ class Sarakststemplate{
 		BYTE getByteofStruct(){
 			return sizeof(struct elem);
 		}
+		
+		
+		
+		
 
 		void pievien(T x)
 		{
@@ -276,6 +280,46 @@ class Sarakststemplate{
 			t2->num = temp;
 			
 		}
+		
+		printXML(){
+			
+			
+		}
+		
+		printJSON();
+
+		//JUMP ON GAP LENGTH FUNC
+		elem *jump jmp(elem* begin, int n){
+			
+			elem* jump = NULL;
+			
+			for(int i = 0; i < n-1; i++){
+				begin = begin->next;	
+			}
+			jump = begin;
+			return jump;
+				
+		}
+
+		/*
+		shellSort(){
+			int lengt = 9;
+			
+			for(int gap = lengt/2; gap > 0; gap/2){
+				
+				
+				for(int i = 0;i<lengt; n+=1){
+					
+					
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		*/
 
 };
 
@@ -290,22 +334,22 @@ class Sarakststemplate{
 int main(){
 	int xx,del,vieta,el,piev;
 	LIFO::Sarakststemplate <int>x;
+	
     int d;
 
 
-
-	
-    
-    int t = clock();
-    
-    
-    for(int i = 0;i<50000;i++){
-    	x.pushFIFO(rand( ) % 20);    	
-	}
-	
-	for( int j; j<50000;j++){
-		x.popFIFO();
-	}
+	x.pievien(14);
+	x.pievien(18);
+	x.pievien(19);
+	x.pievien(37);
+	x.pievien(23);
+	x.pievien(40);
+	x.pievien(29);
+	x.pievien(30);
+	x.pievien(11);
+	cout << endl;
+	x.izvad();
+	x.jmp(first,4);
 	
 	
 	
