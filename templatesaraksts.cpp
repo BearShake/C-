@@ -15,9 +15,10 @@ class Sarakststemplate{
 		elem *next;
 	};
 	private:
-		T x,dz,length;
+		T x,dz;
 		elem * first = NULL, *last = NULL, *p = NULL, *node = NULL;
-		int lg;
+		int length = 0;
+		
 	public:
 
 		BYTE getByteofStruct(){
@@ -36,7 +37,7 @@ class Sarakststemplate{
 				last->next = p;
 				last = last ->next;
 			}
-			lg++;
+			length += 1 ;
 		}
 
 		void izvad()
@@ -88,48 +89,6 @@ class Sarakststemplate{
 				}
 		}
 
-		void delelementv2(T dz)//Nav pabeigts,strada nepareizi,   metode ir paredzeta nodzesanai visiem elementiem, kuri vienadi ar lietotaja ievadito
-		{
-			int count = 0;
-			int temp = 0;
-			int i = 0;
-			p = first;
-			elem *ped = NULL;
-			if(first->num == dz){
-				first = p->next;
-				delete first;
-			}else{
-				for(p = first;p->next != NULL; p = p->next){
-					count++;
-					ped = p;
-				}
-					if(ped->num == dz) delete ped;
-					else{
-
-						p = first;
-						while(p->next != NULL){
-							p = p->next;
-							if(p->next->num == dz ){
-								elem *p2 = p->next;
-								p->next = p->next->next;
-								delete p2;
-								cout << "Tika izdests elements ar vietu " << i << endl;
-
-							}
-							temp++;
-							i++;
-						}
-
-						if (temp == 0){
-							cout << "Jusu saraksta nav tada elementa" << endl;
-						}
-
-					}
-			}
-		}
-
-	
-
 		void push(T el){
 
             p = new elem();
@@ -139,9 +98,6 @@ class Sarakststemplate{
 
 
 		}
-
-	
-
 
         T popLIFO(){
 
@@ -250,6 +206,183 @@ class Sarakststemplate{
 			t2->num = temp;
 			
 		}
+		
+		
+		
+		
+		void printXML(){
+			cout << "<list>" << endl; 
+			for(p = first; p !=NULL; p=p->next){ 
+				cout << " <record>" << endl; 
+				cout << " <item>"<< p->num << "</item>" << endl; 
+				cout << " <link_on_item>"<< p << "</link_on_item>"<< endl; 
+				cout << " <next_link>" << p->next <<"</next_link>"<< endl; 
+				cout << " </record>" << endl; 
+			} 
+			cout << "</list>" << endl; 
+			cout << endl << "Length - " << this->length << endl; 
+	
+		}
+		
+		void printJSON(){
+			
+			cout<< "{" << endl; 
+			for(p = first; p !=NULL; p=p->next){ 
+				cout << " {" << endl; 
+				cout << " 'Item': " << p->num << "," << endl; 
+				cout << " 'Link on item': "<< p << "," << endl; 
+				cout << " 'Next link': "<< p->next << "," << endl; 
+				if(p!=last) cout << " }," << endl; 
+				else  cout << " }" << endl; 
+	
+			} 
+			cout << "}" << endl; 
+			cout << endl << "Length - " << this->length << endl; 
+		} 
+			
+			
+		
+
+		//JUMP ON GAP LENGTH FUNC
+		elem* jmp(elem* begin, int n){
+			
+			elem* jump = NULL;
+			
+			for(int i = 0; i < n; i++){
+				
+				begin = begin->next;
+					
+			}
+			jump = begin;
+			return jump;
+				
+		}
+		
+		elem* getFirst(){
+		
+			elem *f = this->first;
+			//cout << f->num;
+			return f;
+		}
+		
+		elem* getLast(){
+			
+			elem *l = this->last;
+			return l;
+		}
+
+		
+		void shellSort(){
+			int lengt = 9;
+				elem* t_first = NULL, *t_last = NULL, *t_temp = NULL;
+			
+				t_first = first;
+				t_last = last;
+				cout << "First: " << t_first->num << " LASt: " << t_last->num; 
+				int gap = 4;
+				
+				t_temp = jmp(first,4);
+				
+				//PRECHECK
+				if(t_first->num > t_temp->num){
+						swap(t_first,t_temp);
+					}
+				for(int i = gap;i<lengt; i+=1){
+
+					if(t_first->num > t_temp->num){
+						swap(t_first,t_temp);
+					}
+					t_temp = t_temp->next;
+					t_first = t_first->next;
+					
+					
+				}
+				
+			}
+			
+			
+			void remove(T x){
+				int lgt = 0;
+				if(first == 0){
+					cout << "saraksts ir tuks" << endl;
+					
+				}else{
+					if(x > length){
+						cout << " Saraksta nav tik daudz elementu" << endl;
+					}else{
+						if(x == 0){
+							elem *temp = first->next;
+							delete first;
+							first = temp;	
+						}else{
+							
+							p = first;
+							while(lgt+1 != x){
+								p = p->next;
+								lgt += 1;	
+							}
+							elem *t = p->next;
+							p->next = p->next->next;
+							delete t;	
+						}		
+					}
+	
+				}
+	
+			}	
+			
+			
+			void addAfter(int pos){
+				
+				if(pos >= this->length){
+					
+					p = first;
+					cout << " Saraksta nav tik daudz elementu un jusu skaitlis tiks pievienots beigas" << endl;
+					elem *n = new elem;
+					n->num = 1;
+					last->next = n;
+					last = n;
+				}else{
+					if(pos == 0){
+						elem *t = new elem;
+						t->num = 1;
+						elem* t_next = first->next;
+						first->next = t;
+						t->next = t_next;
+					
+					}else{
+						p = first;
+						int count = 0;
+						while(count+1 != pos){
+							p = p->next;
+							count += 1;
+						}
+						
+						elem *temp = p->next;
+						elem *f = new elem;
+						f->num = 1;
+						p->next = f;
+						f->next = temp;
+	
+					}	
+				}
+				//length
+				this->length += 1;
+			}
+			
+			
+			// !!
+			elem* findElement(T el){
+				
+				
+				
+			}
+				
+			
+		
+		
+		
+		
 
 };
 
@@ -257,8 +390,6 @@ class Sarakststemplate{
 
 
 }
-
-
 
 
 int main(){
@@ -291,13 +422,35 @@ int main(){
 	x.izvad();
 	*/
 	
-	for (int i = 0;i<1500000;i++){
-		x.pushLIFO(rand() %20);
-	}
 	
-	for(int j = 0 ;j<1500000;j++){
-		x.popLIFO();
+	//TEST FOR SORT LINEAR
+	/*
+	x.pievien(14);
+	x.pievien(18);
+	x.pievien(19);
+	x.pievien(37);
+	x.pievien(23);
+	x.pievien(40);
+	x.pievien(29);
+	x.pievien(30);
+	x.pievien(11);
+	x.izvad();
+	cout << endl;
+	x.jmp(x.getFirst(),4);
+	x.shellSort();
+	cout << "SHELL SORT" <<  endl;
+	x.izvad();
+	*/
+	
+	int add;
+	int c = 0;
+	for(int d = 0; d< 5;d++){
+		cin >> c;
+		x.pievien(c);
 	}
+	x.printJSON();
+	
+	
 	
 	
 	
