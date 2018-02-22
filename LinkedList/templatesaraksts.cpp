@@ -286,14 +286,22 @@ class Sarakststemplate{
 				//PRECHECK
 				if(t_first->num > t_temp->num){
 						swap(t_first,t_temp);
+						cout << t_first->num <<  "  || " << t_temp->num << endl;
 					}
 				for(int i = gap;i<lengt; i+=1){
 
 					if(t_first->num > t_temp->num){
 						swap(t_first,t_temp);
 					}
-					t_temp = t_temp->next;
+					if(t_temp == last){
+						cout << "LAST";	
+						t_temp = last;
+						//!!!
+					}else{
+						t_temp = t_temp->next;
 					t_first = t_first->next;
+						
+					}
 					
 					
 				}
@@ -424,7 +432,7 @@ int main(){
 	
 	
 	//TEST FOR SORT LINEAR
-	/*
+	
 	x.pievien(14);
 	x.pievien(18);
 	x.pievien(19);
@@ -434,21 +442,16 @@ int main(){
 	x.pievien(29);
 	x.pievien(30);
 	x.pievien(11);
+	cout << endl;
 	x.izvad();
 	cout << endl;
 	x.jmp(x.getFirst(),4);
 	x.shellSort();
 	cout << "SHELL SORT" <<  endl;
 	x.izvad();
-	*/
 	
-	int add;
-	int c = 0;
-	for(int d = 0; d< 5;d++){
-		cin >> c;
-		x.pievien(c);
-	}
-	x.printJSON();
+	
+	
 	
 	
 	
