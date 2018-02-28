@@ -337,6 +337,36 @@ class Sarakststemplate{
 	
 				}
 	
+			}
+			
+			
+			void shellMas(int arr[]){
+				int length = 9;
+				int gap = length;
+				int temp;
+				
+				for(int i = length/2; i>0; i = i/2){
+					for(int j = i; j<length;j++){
+						for(int k = j-i; k>= 0; k = k -i){
+							
+							if(arr[k+1] >= arr[k]) break;
+							else{
+								
+								temp = arr[k];
+								arr[k] = arr[k+1];
+								arr[k+1] = temp;
+							}
+						}
+						
+						
+					}
+					
+					
+					
+				}
+				
+				
+				
 			}	
 			
 			
@@ -431,6 +461,7 @@ int main(){
 	*/
 	
 	
+	/*
 	//TEST FOR SORT LINEAR
 	
 	x.pievien(14);
@@ -449,9 +480,13 @@ int main(){
 	x.shellSort();
 	cout << "SHELL SORT" <<  endl;
 	x.izvad();
+	*/
 	
-	
-	
+	int arr[] = {25, 13, 12, 14, 35, 38, 41, 2, 9};
+	x.shellMas(arr);
+	for(int l = 0;l < 9;l++){
+		cout  << arr[l] << " ";
+	}
 	
 	
 	
