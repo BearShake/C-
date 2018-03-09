@@ -49,6 +49,35 @@ void add(int x, Node *&tr){
 	
 }
 
+//SEARCH
+bool Tree::search(int value, Node *node) {
+
+    while (node != NULL){
+    if (value == node->getValue()) {
+        return true;
+    } 
+    else {
+        if(value <= node->GetValue()) return search(value, node->GetLeft());
+        else return search(value, node->GetRight());
+    }
+    }
+    return false;
+}
+
+bool Tree::search(int value) {
+    while (head != NULL){
+    if (value == head->GetValue()) {
+        return true;
+    } 
+    else {
+        if(value <= head->GetValue()) return search(value, head->GetLeft());
+        else return search(value, head->GetRight());
+    }
+    }
+    return false;
+}
+//SEARCH end
+
 
 int main(){
 	Node *tree = NULL;
